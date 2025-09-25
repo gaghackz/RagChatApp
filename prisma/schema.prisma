@@ -15,7 +15,7 @@ datasource db {
 }
 
 model User {
-  id BigInt @unique @default(autoincrement()) 
+  id BigInt @id @default(autoincrement()) 
   role String @default("user")
   username String @unique
   email String @unique
@@ -24,7 +24,7 @@ model User {
 }
 
 model Chatroom {
-  id BigInt @unique @default(autoincrement())
+  id BigInt @id @default(autoincrement())
 
   userid BigInt 
   chats Chats[]
@@ -32,7 +32,7 @@ model Chatroom {
 }
 
 model Chats {
-  id BigInt @unique @default(autoincrement())
+  id BigInt @id @default(autoincrement())
   text String
 
   roomid BigInt
