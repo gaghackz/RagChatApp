@@ -5,15 +5,15 @@ export async function POST(req: NextRequest) {
   try {
     
     const body = await req.json();
-    const { userid,message,roomid} = body;
+    const { clerkid,message,roomid} = body;
     
 
 
     const chat = await prisma.chats.create({
         data:{
-            
+          
             text:message,
-            userid:userid,
+            userid:clerkid,
             roomid: roomid
         }
     })

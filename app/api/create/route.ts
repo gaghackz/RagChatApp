@@ -5,7 +5,7 @@ export async function POST(req: NextRequest) {
   try {
     
     const body = await req.json();
-    const { username, email } = body;
+    const { username, email,clerkId } = body;
     
     if (!username || !email) {
       return NextResponse.json(
@@ -16,7 +16,8 @@ export async function POST(req: NextRequest) {
     const user = await prisma.user.create({
         data:{
             username,
-            email
+            email,
+            clerkId
         }
     })
     return NextResponse.json({ success: true, message: "User registered successfully." });
