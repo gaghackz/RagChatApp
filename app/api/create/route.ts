@@ -1,12 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import prisma from "@/app/db"
+import prisma from "@/app/db";
 
 export async function POST(req: NextRequest) {
   try {
-    
     const body = await req.json();
-    const { username, email,clerkId } = body;
-    
+    const { username, email, clerkId } = body;
+
     if (!username || !email) {
       return NextResponse.json(
         { success: false, message: "Username and email are required." },
@@ -14,13 +13,16 @@ export async function POST(req: NextRequest) {
       );
     }
     const user = await prisma.user.create({
-        data:{
-            username,
-            email,
-            clerkId
-        }
-    })
-    return NextResponse.json({ success: true, message: "User registered successfully." });
+      data: {
+        username,
+        email,
+        clerkId,
+      },
+    });
+    return NextResponse.json({
+      success: true,
+      message: "User registered successfully.",
+    });
   } catch (error) {
     console.error("Error registering user:", error);
     return NextResponse.json(

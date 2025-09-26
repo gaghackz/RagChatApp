@@ -26,6 +26,7 @@ model User {
 
 model Chatroom {
   id BigInt @id @default(autoincrement())
+  title String @default("Chatroom")
 
   userid BigInt 
   chats Chats[]
