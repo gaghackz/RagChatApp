@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import parseAndSave from "../utils/parseAndSave";
 import extractText from "../utils/extractText";
 import { chunkTextBySentence } from "../utils/chunker";
+import { generateEmbeddings } from "../utils/embedder";
 import fs from "fs";
 import path from "path";
 
@@ -18,6 +19,8 @@ export async function POST(req: Request) {
     let extractedText = await extractText(filePath);
 
     const chunkedWords = chunkTextBySentence(extractedText);
+
+    const embeddings = await generateEmbeddings(chunkedWords);
 
     return NextResponse.json({
       success: true,
