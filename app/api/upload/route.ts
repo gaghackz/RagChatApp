@@ -24,7 +24,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       success: true,
-      text: extractedText,
+      text: embeddings,
     });
   } catch (err) {
     console.error("Upload Error:", err);
