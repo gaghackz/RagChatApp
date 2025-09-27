@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import parseAndSave from "../utils/parseAndSave";
 import extractText from "../utils/extractText";
+import { chunkTextBySentence } from "../utils/chunker";
 import fs from "fs";
 import path from "path";
 
@@ -15,6 +16,8 @@ export async function POST(req: Request) {
     const filePath: any = await parseAndSave(uploadDir, formData);
 
     let extractedText = await extractText(filePath);
+
+    const chunkedWords = chunkTextBySentence(extractedText);
 
     return NextResponse.json({
       success: true,
